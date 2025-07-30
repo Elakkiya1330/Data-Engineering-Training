@@ -1,0 +1,6 @@
+device_id,device_name,room_id,room_name,status,power_rating
+101,Air Conditioner,1,Living Room,ON,1500
+102,Refrigerator,2,Kitchen,ON,200
+103,TV,1,Living Room,OFF,120
+104,Heater,3,Bedroom,ON,1800
+105,Washing Machine,2,Kitchen,OFF,500
