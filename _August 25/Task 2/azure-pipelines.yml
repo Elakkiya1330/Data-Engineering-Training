@@ -1,0 +1,28 @@
+trigger:
+- main   
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  PYTHON_VERSION: '3.10'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(PYTHON_VERSION)'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    python sales_data_pipeline.py
+  displayName: 'Run data pipeline'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'output'
+    ArtifactName: 'processed-files'
+    publishLocation: 'Container'
