@@ -1,0 +1,29 @@
+trigger:
+- main 
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+# Step 1: Set up Python
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+
+# Step 2: Install dependencies
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+# Step 3: Run data processing script
+- script: |
+    python data_processing.py
+  displayName: 'Run data processing'
+
+# Step 4: Publish artifacts (both raw & cleaned CSVs)
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'data'
+    ArtifactName: 'sales-data'
+    publishLocation: 'Container'
